@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793718323640,
+      "tag": "0000_equola_core_schema",
+      "breakpoints": true
+    }
+  ]
+}

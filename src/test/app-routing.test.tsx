@@ -15,3 +15,29 @@ describe("App routing", () => {
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
 });
+
+describe("App routing — Equało pages", () => {
+  const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+
+  it.each([
+    ["/", "/"],
+    ["/explore", "explore"],
+    ["/opportunity/some-id", "opportunity/$id"],
+    ["/auth", "auth"],
+    ["/dashboard", "dashboard"],
+    ["/tracker", "tracker"],
+    ["/org", "org"],
+    ["/post", "post"],
+  ] as const)("matches %s to its route, not not-found", (path, id) => {
+    const matches = router.matchRoutes(path);
+    expect(String(matches.at(-1)?.routeId)).toContain(id);
+    if (path === "/") expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
+  });
+
+  it("gates protected pages behind the _authenticated layout", () => {
+    for (const path of ["/dashboard", "/tracker", "/org", "/onboarding"]) {
+      const ids = router.matchRoutes(path).map((m) => m.routeId);
+      expect(ids.some((r) => r.includes("_authenticated"))).toBe(true);
+    }
+  });
+});
