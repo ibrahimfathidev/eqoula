@@ -16,7 +16,7 @@ real seed data.
 - [x] Equało branding: logo assets, favicon, PWA manifest (installable)
 
 ## Open
-- [ ] Verify full flow end-to-end with a real sign-in (needs a test Google account in preview)
+- [ ] Try Google sign-in with a real account in the preview (headless tests verified everything around it; the Google handshake itself needs a human)
 - [ ] Arabic + English toggle with RTL (brief asks for Cairo/Tajawal, full RTL mirror)
 - [ ] Offline support (service worker) — manifest-only PWA shipped so far
 - [ ] Deadline reminders (WhatsApp-style preview) and notifications
