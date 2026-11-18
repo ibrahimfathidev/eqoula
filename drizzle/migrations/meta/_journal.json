@@ -15,6 +15,13 @@
       "when": 1793719469330,
       "tag": "0001_real_program_data",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794963023752,
+      "tag": "0002_add_application_checklist",
+      "breakpoints": true
     }
   ]
 }

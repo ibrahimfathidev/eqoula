@@ -172,6 +172,7 @@ export type Database = {
       }
       tracker_entries: {
         Row: {
+          application_checklist: Json
           created_at: string
           id: string
           opportunity_id: string
@@ -180,6 +181,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          application_checklist?: Json
           created_at?: string
           id?: string
           opportunity_id: string
@@ -188,6 +190,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          application_checklist?: Json
           created_at?: string
           id?: string
           opportunity_id?: string
