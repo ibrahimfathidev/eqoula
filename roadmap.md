@@ -17,6 +17,7 @@ real seed data.
 
 ## Open
 - [ ] Try Google sign-in with a real account in the preview (headless tests verified everything around it; the Google handshake itself needs a human)
+- [ ] Create the first ad campaign after settling audience, destination, channel and budget in the campaign brief
 - [ ] Application checklist per opportunity (beyond saved/in-progress/submitted)
 - [ ] Arabic + English toggle with RTL (brief asks for Cairo/Tajawal, full RTL mirror)
 - [ ] Offline support (service worker) — manifest-only PWA shipped so far
