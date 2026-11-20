@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  useRouterState,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
@@ -13,7 +14,15 @@ import { Toaster } from "@/components/ui/sonner";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { AuthProvider } from "@/lib/auth";
+import { AuthProvider, useAuth } from "@/lib/auth";
+
+declare global {
+  interface Window {
+    aclib?: {
+      runAutoTag: (options: { zoneId: string }) => void;
+    };
+  }
+}
 
 function NotFoundComponent() {
   return (
@@ -141,9 +150,42 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider queryClient={queryClient}>
+        <PublicAdTag />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
       </AuthProvider>
     </QueryClientProvider>
   );
+}
+
+function PublicAdTag() {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const { session, loading } = useAuth();
+
+  useEffect(() => {
+    const isPublicOpportunityPage =
+      pathname === "/" || pathname === "/explore" || pathname.startsWith("/opportunity/");
+    const isPublishedSite = window.location.hostname === "eqoula.lovable.app";
+
+    if (
+      !import.meta.env.PROD ||
+      window.self !== window.top ||
+      !isPublishedSite ||
+      loading ||
+      session ||
+      !isPublicOpportunityPage ||
+      document.querySelector('script[data-equola-ad-tag="true"]')
+    ) {
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://acscdn.com/script/aclib.js";
+    script.async = true;
+    script.dataset["equolaAdTag"] = "true";
+    script.onload = () => window.aclib?.runAutoTag({ zoneId: "kydng40uho" });
+    document.body.appendChild(script);
+  }, [loading, pathname, session]);
+
+  return null;
 }

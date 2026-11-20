@@ -51,6 +51,17 @@ export type TrackerEntry = {
   opportunity?: Opportunity;
 };
 
+export type OrgTrackerEntry = {
+  id: string;
+  student_id: string;
+  opportunity_id: string;
+  status: string;
+  created_at: string;
+  updated_at: string;
+  application_checklist: unknown;
+  opportunity: { title: string; type: string } | null;
+};
+
 export async function fetchMyProfile(userId: string): Promise<Profile | null> {
   const { data, error } = await supabase
     .from("profiles")
@@ -201,12 +212,12 @@ export async function fetchOrgStudents(organizationId: string): Promise<Profile[
 }
 
 /** Tracker entries across an educator's students (RLS-scoped). */
-export async function fetchOrgTrackerEntries(): Promise<TrackerEntry[]> {
+export async function fetchOrgTrackerEntries(): Promise<OrgTrackerEntry[]> {
   const { data, error } = await supabase
     .from("tracker_entries")
     .select("*, opportunity:opportunities(title, type)");
   if (error) throw error;
-  return (data ?? []) as TrackerEntry[];
+  return (data ?? []) as OrgTrackerEntry[];
 }
 
 /** Opportunities posted by one educator profile. */

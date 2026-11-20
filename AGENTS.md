@@ -18,3 +18,4 @@
 - Mobile-first: `app-shell` (max-w-md centered) + fixed bottom tab nav; fonts via Google Fonts `Cairo` loaded in `src/routes/__root.tsx`.
 - Brand tokens live in `src/styles.css` (navy primary `--primary`, pink `--accent`, `--pink-soft`, `--navy-soft`) — never hardcode colors in components.
 - Seed data lives in migration `drizzle/migrations/0000_equola_core_schema.sql` (9 orgs, 9 real programs); deadlines are placeholders to verify with providers.
+- Third-party ad scripts load client-side only on the primary published host's public browsing pages for signed-out visitors, protecting student account screens from ad tracking.

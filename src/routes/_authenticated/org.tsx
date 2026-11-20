@@ -16,7 +16,7 @@ import {
   fetchPostedOpportunities,
   deleteOpportunity,
   type Profile,
-  type TrackerEntry,
+  type OrgTrackerEntry,
   type Opportunity,
 } from "@/lib/data";
 import {
@@ -132,7 +132,7 @@ function StatCard({ label, value, icon: Icon, hint }: { label: string; value: st
 
 function ImpactTab({ organizationId }: { organizationId: string | null }) {
   const [students, setStudents] = useState<Profile[] | null>(null);
-  const [entries, setEntries] = useState<TrackerEntry[] | null>(null);
+  const [entries, setEntries] = useState<OrgTrackerEntry[] | null>(null);
 
   useEffect(() => {
     if (!organizationId) return;
